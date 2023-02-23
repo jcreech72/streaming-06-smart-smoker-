@@ -1,6 +1,6 @@
-# streaming-05-smart-smoker
+# streaming-06-smart-smoker
 Julie Creech 
-February 14, 2023
+February 22, 2023
 ## Creating a Producer
 
 # Using a Barbeque Smoker:
@@ -35,12 +35,29 @@ Within the Try function the blocking connection is created to the RabbitMQ serve
 First, the queues are deleted to clear old messages, and then the queues are created. The queues are durable so the messages will persist, which is why they have to be deleted in the beginning. 
 Next, the file is open and read. There is a for statement which iterates through the data with if statements to read the data and understand if the value is greater than 0. If it is >0, a variable is established with the value of floater type including the value within the csv file at that line. 
 We provide a message showing the values and then prepare the data to be sent over the channel using a routing key. 
-The listener has not yet been established; however, I was able to see in the console this reaches RabbitMQ and is sitting in a queue.
+
+##The Listener
+The listener was constructed with imports for Pika, Sys, Time, Pickle and Deque
+Deque was new but is a way to control the amount of data that is retained and how it is parsed. The Deque is used to limi the readings from 2.5 minutes for 5 readings and 10 minutes subsequently for 20 readings.
+Functions are used to define the deques and provide logic to readings with outputs to the consumer or console. Had trouble with getting this to render correctly.
+
+
 
 Once complete, the connect is closed. 
 ## How to Run the Program
 For this exercise, to show the producer, the V1_Smoker_Emitter.py file can be run within a VS Code terminal. Once run, you will be asked whether you want the console to open, and the default browser will pop open to display the console showing a login or the queues that have been created. 
 The code will continue to run until complete. It may be interrupted with a CTRl+C
 
+The listener can be executed by running the V1_listening_worker.py in terminal
+
+
 ## Screen Shot of Running Demonstration
-![Screenshot 2023-02-14 221059](https://user-images.githubusercontent.com/89232631/218927714-b31acb34-850c-4ec3-8a91-7ba4da1b0741.jpg)
+Emitter:
+
+![Emitter](https://user-images.githubusercontent.com/89232631/220830109-78d61766-5af5-42f2-ba52-c73841c78128.jpg)
+
+Consumer:
+![Consumers](https://user-images.githubusercontent.com/89232631/220830119-372326fc-3178-45d3-8431-c764d4c58913.jpg)
+
+RabbitQueue:
+![RabbitMQ Queue](https://user-images.githubusercontent.com/89232631/220830148-f535b3f7-d42e-48ce-bcdf-ee17e5104271.jpg)
